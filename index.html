@@ -1,616 +1,794 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="bn">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Official admission and information portal of Narayangarh R.R.C.L.U.S. Niketan">
-    <meta name="theme-color" content="#0b3d91">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Official Website of Narayangarh R.R.C.L.U.S. Niketan - Government Sponsored Higher Secondary School">
+<meta name="theme-color" content="#073b8c">
+<title>Narayangarh R.R.C.L.U.S. Niketan | Official School Portal</title>
 
-    <title>Narayangarh R.R.C.L.U.S. Niketan | Admission Portal</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-    <!-- Bootstrap 5 -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
-    <style>
-        :root {
-            --primary: #0b3d91;
-            --primary-dark: #06275f;
-            --accent: #f4b400;
-            --surface: #ffffff;
-            --soft: #f4f7fb;
-            --text: #172033;
-            --muted: #667085;
-            --border: #e5eaf2;
-            --shadow: 0 12px 35px rgba(16, 24, 40, .09);
-        }
-
-        html { scroll-behavior: smooth; }
-
-        body {
-            margin: 0;
-            color: var(--text);
-            background: var(--soft);
-            font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
-        }
-
-        .top-strip {
-            background: #071a3d;
-            color: rgba(255,255,255,.9);
-            font-size: .88rem;
-        }
-
-        .school-header {
-            position: relative;
-            overflow: hidden;
-            color: #fff;
-            background:
-                radial-gradient(circle at 85% 15%, rgba(53, 196, 255, .28), transparent 30%),
-                linear-gradient(135deg, #06275f 0%, #0b3d91 52%, #087ea4 100%);
-        }
-
-        .school-header::after {
-            content: "";
-            position: absolute;
-            width: 330px;
-            height: 330px;
-            right: -110px;
-            bottom: -190px;
-            border: 55px solid rgba(255,255,255,.06);
-            border-radius: 50%;
-        }
-
-        .school-emblem {
-            width: 86px;
-            height: 86px;
-            display: grid;
-            place-items: center;
-            flex: 0 0 86px;
-            border: 2px solid rgba(255,255,255,.35);
-            border-radius: 50%;
-            background: rgba(255,255,255,.10);
-            box-shadow: 0 10px 25px rgba(0,0,0,.15);
-            font-size: 2.35rem;
-        }
-
-        .school-name {
-            margin: 0;
-            font-size: clamp(1.65rem, 4vw, 3.15rem);
-            line-height: 1.12;
-            font-weight: 800;
-            letter-spacing: -.02em;
-        }
-
-        .school-subtitle {
-            color: rgba(255,255,255,.88);
-            font-size: 1.05rem;
-        }
-
-        .school-codes {
-            color: rgba(255,255,255,.72);
-            font-size: .85rem;
-        }
-
-        .navbar {
-            box-shadow: 0 4px 18px rgba(0,0,0,.07);
-        }
-
-        .navbar-brand {
-            font-weight: 750;
-        }
-
-        .hero-card {
-            margin-top: -30px;
-            position: relative;
-            z-index: 3;
-            border: 1px solid rgba(255,255,255,.8);
-            border-radius: 20px;
-            box-shadow: var(--shadow);
-            background: rgba(255,255,255,.97);
-        }
-
-        .notice-alert {
-            border: 0;
-            border-left: 5px solid var(--accent);
-            border-radius: 14px;
-            background: #fff9e8;
-        }
-
-        .section-title {
-            font-weight: 800;
-            letter-spacing: -.02em;
-        }
-
-        .section-kicker {
-            color: var(--primary);
-            font-size: .78rem;
-            font-weight: 800;
-            letter-spacing: .12em;
-            text-transform: uppercase;
-        }
-
-        .action-card {
-            height: 100%;
-            border: 1px solid var(--border);
-            border-radius: 18px;
-            background: var(--surface);
-            box-shadow: 0 8px 25px rgba(16,24,40,.055);
-            transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
-        }
-
-        .action-card:hover {
-            transform: translateY(-3px);
-            box-shadow: var(--shadow);
-            border-color: #c9d6eb;
-        }
-
-        .action-icon {
-            width: 48px;
-            height: 48px;
-            display: grid;
-            place-items: center;
-            border-radius: 14px;
-            font-size: 1.25rem;
-            background: #edf4ff;
-            color: var(--primary);
-        }
-
-        .quick-actions .btn {
-            min-height: 48px;
-            border-radius: 12px;
-            font-weight: 650;
-        }
-
-        .info-card {
-            border: 1px solid var(--border);
-            border-radius: 18px;
-            background: #fff;
-            box-shadow: 0 8px 25px rgba(16,24,40,.045);
-        }
-
-        .step-number {
-            width: 38px;
-            height: 38px;
-            border-radius: 50%;
-            display: grid;
-            place-items: center;
-            color: #fff;
-            background: var(--primary);
-            font-weight: 800;
-            flex: 0 0 38px;
-        }
-
-        .contact-card {
-            border-radius: 18px;
-            background: linear-gradient(135deg, #0b3d91, #087ea4);
-            color: #fff;
-            box-shadow: var(--shadow);
-        }
-
-        .footer {
-            background: #071a3d;
-            color: rgba(255,255,255,.78);
-        }
-
-        .footer a {
-            color: #fff;
-            text-decoration: none;
-        }
-
-        .modal-content {
-            border: 0;
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 25px 70px rgba(0,0,0,.20);
-        }
-
-        .modal-header {
-            color: #fff;
-            background: linear-gradient(135deg, #06275f, #0b3d91);
-        }
-
-        .modal-title {
-            font-weight: 800;
-        }
-
-        .modal-body {
-            line-height: 1.75;
-        }
-
-        .admission-btn {
-            background: var(--accent);
-            color: #171717;
-            border: 0;
-        }
-
-        .admission-btn:hover {
-            background: #dca300;
-            color: #111;
-        }
-
-        @media (max-width: 575.98px) {
-            .school-emblem {
-                width: 64px;
-                height: 64px;
-                flex-basis: 64px;
-                font-size: 1.7rem;
-            }
-
-            .hero-card {
-                margin-top: -20px;
-            }
-
-            .school-subtitle {
-                font-size: .94rem;
-            }
-        }
-    </style>
+<style>
+:root{
+    --primary:#073b8c;
+    --primary2:#0b63c7;
+    --dark:#071b3a;
+    --accent:#f4b400;
+    --soft:#f5f8fc;
+    --text:#172033;
+    --muted:#667085;
+    --border:#e4eaf2;
+    --shadow:0 12px 34px rgba(16,24,40,.08);
+}
+html{scroll-behavior:smooth}
+body{
+    margin:0;
+    color:var(--text);
+    background:var(--soft);
+    font-family:system-ui,-apple-system,"Segoe UI","Noto Sans Bengali",Arial,sans-serif;
+}
+.topbar{
+    background:var(--dark);
+    color:rgba(255,255,255,.84);
+    font-size:.83rem;
+}
+.topbar a{color:#fff;text-decoration:none}
+.school-header{
+    color:#fff;
+    background:
+      radial-gradient(circle at 85% 15%,rgba(74,197,255,.28),transparent 28%),
+      linear-gradient(135deg,#05265c,#073b8c 58%,#087da5);
+    position:relative;
+    overflow:hidden;
+}
+.school-header:after{
+    content:"";
+    position:absolute;
+    width:440px;height:440px;
+    right:-200px;bottom:-310px;
+    border:70px solid rgba(255,255,255,.06);
+    border-radius:50%;
+}
+.emblem{
+    width:82px;height:82px;
+    display:grid;place-items:center;
+    flex:0 0 82px;
+    border:2px solid rgba(255,255,255,.3);
+    border-radius:50%;
+    background:rgba(255,255,255,.1);
+    font-size:2.25rem;
+}
+.school-title{
+    margin:0;
+    font-size:clamp(1.45rem,4vw,2.8rem);
+    line-height:1.1;
+    font-weight:850;
+    letter-spacing:-.025em;
+}
+.school-sub{color:rgba(255,255,255,.84)}
+.school-code{font-size:.78rem;color:rgba(255,255,255,.66)}
+.navbar{box-shadow:0 4px 18px rgba(0,0,0,.07)}
+.navbar-brand{font-weight:800}
+.nav-link{font-weight:600}
+.hero{
+    min-height:480px;
+    display:flex;
+    align-items:center;
+    color:#fff;
+    background:
+      linear-gradient(90deg,rgba(3,29,70,.96),rgba(7,59,140,.76),rgba(8,125,165,.42)),
+      radial-gradient(circle at 75% 35%,rgba(255,255,255,.18),transparent 24%),
+      linear-gradient(135deg,#092a62,#087ea4);
+}
+.hero-kicker{
+    font-size:.78rem;
+    font-weight:800;
+    letter-spacing:.15em;
+    text-transform:uppercase;
+    color:#ffe28a;
+}
+.hero h1{
+    font-weight:900;
+    letter-spacing:-.04em;
+    font-size:clamp(2.25rem,6vw,4.7rem);
+    line-height:1.04;
+}
+.hero p{color:rgba(255,255,255,.83);font-size:1.08rem;max-width:720px}
+.btn-accent{background:var(--accent);border:0;color:#171717;font-weight:750}
+.btn-accent:hover{background:#dca300;color:#111}
+.hero-panel{
+    background:rgba(255,255,255,.11);
+    border:1px solid rgba(255,255,255,.18);
+    backdrop-filter:blur(8px);
+    border-radius:22px;
+}
+.stats-wrap{margin-top:-40px;position:relative;z-index:3}
+.stat-card{
+    background:#fff;
+    border:1px solid var(--border);
+    border-radius:18px;
+    box-shadow:var(--shadow);
+}
+.stat-icon{
+    width:48px;height:48px;display:grid;place-items:center;
+    border-radius:14px;background:#edf4ff;color:var(--primary);
+    font-size:1.25rem;
+}
+.section{padding:78px 0}
+.section-alt{background:#fff}
+.kicker{
+    color:var(--primary);
+    font-size:.75rem;
+    font-weight:850;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+}
+.section-title{
+    font-weight:850;
+    letter-spacing:-.03em;
+}
+.notice-board{
+    border:1px solid var(--border);
+    border-radius:20px;
+    background:#fff;
+    box-shadow:var(--shadow);
+    overflow:hidden;
+}
+.notice-head{
+    color:#fff;
+    background:linear-gradient(135deg,#073b8c,#0b63c7);
+}
+.notice-item{
+    border-bottom:1px solid var(--border);
+    padding:18px 20px;
+}
+.notice-item:last-child{border-bottom:0}
+.date-badge{
+    min-width:66px;
+    text-align:center;
+    border-radius:12px;
+    background:#edf4ff;
+    color:var(--primary);
+    padding:7px;
+    font-weight:800;
+}
+.service-card{
+    height:100%;
+    background:#fff;
+    border:1px solid var(--border);
+    border-radius:18px;
+    padding:24px;
+    transition:.2s ease;
+}
+.service-card:hover{
+    transform:translateY(-4px);
+    box-shadow:var(--shadow);
+    border-color:#cad8ed;
+}
+.service-icon{
+    width:54px;height:54px;display:grid;place-items:center;
+    border-radius:15px;background:#edf4ff;color:var(--primary);
+    font-size:1.35rem;
+}
+.hoi-card{
+    background:linear-gradient(135deg,#fff,#f4f8ff);
+    border:1px solid var(--border);
+    border-radius:24px;
+    box-shadow:var(--shadow);
+}
+.hoi-photo{
+    width:165px;height:165px;
+    object-fit:cover;
+    border-radius:50%;
+    border:6px solid #fff;
+    box-shadow:0 12px 30px rgba(0,0,0,.15);
+}
+.quote-card{
+    height:100%;
+    border-radius:20px;
+    color:#fff;
+    background:linear-gradient(135deg,#073b8c,#087ea5);
+    box-shadow:var(--shadow);
+}
+.quote-mark{font-size:3.2rem;line-height:.7;opacity:.3}
+.info-card{
+    height:100%;
+    background:#fff;
+    border:1px solid var(--border);
+    border-radius:18px;
+    box-shadow:0 8px 25px rgba(16,24,40,.05);
+}
+.gallery-box{
+    min-height:180px;
+    border-radius:18px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:#fff;
+    background:linear-gradient(135deg,#174f9d,#0b849f);
+    overflow:hidden;
+}
+.link-list a{
+    color:var(--text);
+    text-decoration:none;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:10px;
+    padding:13px 0;
+    border-bottom:1px solid var(--border);
+}
+.link-list a:last-child{border-bottom:0}
+.contact-card{
+    color:#fff;
+    background:linear-gradient(135deg,#05265c,#073b8c 65%,#087ea5);
+    border-radius:22px;
+}
+.footer{background:#071b3a;color:rgba(255,255,255,.72)}
+.footer a{color:#fff;text-decoration:none}
+.modal-content{border:0;border-radius:20px;overflow:hidden;box-shadow:0 25px 70px rgba(0,0,0,.2)}
+.modal-header{background:linear-gradient(135deg,#05265c,#073b8c);color:#fff}
+@media(max-width:575.98px){
+    .emblem{width:64px;height:64px;flex-basis:64px;font-size:1.7rem}
+    .hero{min-height:540px}
+    .section{padding:58px 0}
+    .hoi-photo{width:130px;height:130px}
+}
+</style>
 </head>
 
 <body>
 
-<!-- Top information strip -->
-<div class="top-strip py-2">
-    <div class="container d-flex flex-wrap justify-content-between gap-2">
-        <span><i class="fa fa-university me-1"></i> Govt. Sponsored H.S. School</span>
-        <span><i class="fa fa-map-marker me-1"></i> Bahurupa, Narayangarh, Paschim Medinipur, 721437</span>
-    </div>
+<!-- TOP BAR -->
+<div class="topbar py-2">
+<div class="container d-flex flex-wrap justify-content-between gap-2">
+    <span><i class="fa fa-university me-1"></i> Government Sponsored Higher Secondary School</span>
+    <span>
+        <a href="tel:8250787947"><i class="fa fa-phone me-1"></i>Office: 8250787947</a>
+        <span class="mx-2">|</span>
+        <a href="tel:+919732653039">HOI: +91 97326 53039</a>
+    </span>
+</div>
 </div>
 
-<!-- School Header -->
+<!-- SCHOOL HEADER -->
 <header class="school-header">
-    <div class="container py-4 py-md-5">
-        <div class="d-flex align-items-center gap-3 gap-md-4">
-            <div class="school-emblem" aria-hidden="true">
-                <i class="fa fa-university"></i>
-            </div>
-            <div>
-                <h1 class="school-name">Narayangarh R.R.C.L.U.S. Niketan</h1>
-                <div class="school-subtitle mt-2">Govt. Sponsored Higher Secondary School</div>
-                <div class="school-codes mt-2">
-                    WBBSE Code: <strong>L1-176</strong>
-                    <span class="mx-1">•</span>
-                    WBCHSE Code: <strong>205123</strong>
-                </div>
+<div class="container py-4 py-md-5">
+    <div class="d-flex align-items-center gap-3 gap-md-4">
+        <div class="emblem"><i class="fa fa-university"></i></div>
+        <div>
+            <h1 class="school-title">Narayangarh R.R.C.L.U.S. Niketan</h1>
+            <div class="school-sub mt-2">Govt. Sponsored Higher Secondary School</div>
+            <div class="school-code mt-2">
+                WBBSE Code: <strong>L1-176</strong>
+                <span class="mx-2">•</span>
+                WBCHSE Code: <strong>205123</strong>
             </div>
         </div>
     </div>
+</div>
 </header>
 
-<!-- Navigation -->
+<!-- NAVIGATION -->
 <nav class="navbar navbar-expand-lg bg-white sticky-top">
-    <div class="container">
-        <a class="navbar-brand text-primary" href="#">
-            <i class="fa fa-home me-2"></i>School Portal
-        </a>
+<div class="container">
+    <a class="navbar-brand text-primary" href="#">
+        <i class="fa fa-home me-2"></i>School Portal
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+            data-bs-target="#mainNav" aria-controls="mainNav"
+            aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
 
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                data-bs-target="#mainNav" aria-controls="mainNav"
-                aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse" id="mainNav">
-            <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-1">
-                <li class="nav-item"><a class="nav-link" href="#about">Information</a></li>
-                <li class="nav-item"><a class="nav-link" href="#notice">Notice</a></li>
-                <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
-                <li class="nav-item ms-lg-2 mt-2 mt-lg-0">
-                    <a class="btn btn-primary px-3" href="sdcf.aspx?Mode=AdmReq&url=index.htm">
-                        <i class="fa fa-pencil-square-o me-1"></i> Online Admission
-                    </a>
-                </li>
-            </ul>
-        </div>
+    <div class="collapse navbar-collapse" id="mainNav">
+        <ul class="navbar-nav ms-auto align-items-lg-center">
+            <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+            <li class="nav-item"><a class="nav-link" href="#notice">Notice</a></li>
+            <li class="nav-item"><a class="nav-link" href="#services">Services</a></li>
+            <li class="nav-item"><a class="nav-link" href="#hoi">Headmaster</a></li>
+            <li class="nav-item"><a class="nav-link" href="#links">Links</a></li>
+            <li class="nav-item ms-lg-2 mt-2 mt-lg-0">
+                <a href="sdcf.aspx?Mode=AdmReq&url=index.htm" class="btn btn-primary px-3">
+                    <i class="fa fa-pencil-square-o me-1"></i> Online Admission
+                </a>
+            </li>
+        </ul>
     </div>
+</div>
 </nav>
 
-<main>
+<!-- HERO -->
+<section class="hero">
+<div class="container py-5">
+<div class="row align-items-center g-4">
+    <div class="col-lg-8">
+        <div class="hero-kicker mb-3">Welcome to our school</div>
+        <h1>শিক্ষা, শৃঙ্খলা ও মানবিকতার পথে এগিয়ে চলি।</h1>
+        <p class="mt-4">
+            একটি বিদ্যালয় শুধু পাঠ্যপুস্তক শেখায় না—একজন শিক্ষার্থীর জ্ঞান,
+            চরিত্র, আত্মবিশ্বাস, সৃজনশীলতা এবং ভবিষ্যৎ গড়ে তোলে।
+        </p>
+        <div class="d-flex flex-wrap gap-2 mt-4">
+            <a href="sdcf.aspx?Mode=AdmReq&url=index.htm" class="btn btn-accent btn-lg px-4">
+                <i class="fa fa-arrow-right me-2"></i>Apply for Admission
+            </a>
+            <a href="#notice" class="btn btn-outline-light btn-lg px-4">
+                <i class="fa fa-bell-o me-2"></i>Latest Notice
+            </a>
+        </div>
+    </div>
+    <div class="col-lg-4">
+        <div class="hero-panel p-4 p-md-5">
+            <div class="small text-uppercase fw-bold opacity-75">School Message</div>
+            <h2 class="h4 fw-bold mt-2">Learn. Think. Grow.</h2>
+            <p class="mb-0 opacity-75">
+                জ্ঞান অর্জনের পাশাপাশি নিজের মধ্যে সততা, দায়িত্ববোধ,
+                সহমর্মিতা ও আত্মনির্ভরতার বিকাশ ঘটানোই শিক্ষার প্রকৃত উদ্দেশ্য।
+            </p>
+        </div>
+    </div>
+</div>
+</div>
+</section>
 
-    <!-- Important notice -->
-    <div class="container">
-        <div class="hero-card p-3 p-md-4">
-            <div class="notice-alert p-3 p-md-4">
-                <div class="d-flex gap-3">
-                    <div class="text-warning fs-3"><i class="fa fa-bullhorn"></i></div>
-                    <div>
-                        <h2 class="h5 fw-bold mb-1">Admission Portal</h2>
-                        <p class="mb-0">
-                            এই পোর্টালটি মূলত অনলাইন ভর্তির উদ্দেশ্যে তৈরি করা হয়েছে।
-                            পঞ্চম থেকে নবম এবং একাদশ শ্রেণিতে ভর্তির জন্য অনলাইনে আবেদন করা যাবে।
-                            অফলাইনে ভর্তির জন্য বিদ্যালয়ের অফিসে যোগাযোগ করুন।
-                        </p>
-                    </div>
-                </div>
-            </div>
+<!-- STATS -->
+<section class="stats-wrap">
+<div class="container">
+<div class="row g-3">
+    <div class="col-6 col-lg-3">
+        <div class="stat-card p-3 p-md-4 h-100">
+            <div class="stat-icon mb-3"><i class="fa fa-graduation-cap"></i></div>
+            <div class="fw-bold">Academic</div>
+            <div class="small text-secondary">Quality-focused learning</div>
+        </div>
+    </div>
+    <div class="col-6 col-lg-3">
+        <div class="stat-card p-3 p-md-4 h-100">
+            <div class="stat-icon mb-3"><i class="fa fa-users"></i></div>
+            <div class="fw-bold">Students</div>
+            <div class="small text-secondary">Student-centred development</div>
+        </div>
+    </div>
+    <div class="col-6 col-lg-3">
+        <div class="stat-card p-3 p-md-4 h-100">
+            <div class="stat-icon mb-3"><i class="fa fa-book"></i></div>
+            <div class="fw-bold">Learning</div>
+            <div class="small text-secondary">Knowledge & curiosity</div>
+        </div>
+    </div>
+    <div class="col-6 col-lg-3">
+        <div class="stat-card p-3 p-md-4 h-100">
+            <div class="stat-icon mb-3"><i class="fa fa-trophy"></i></div>
+            <div class="fw-bold">Development</div>
+            <div class="small text-secondary">Academic & co-curricular</div>
+        </div>
+    </div>
+</div>
+</div>
+</section>
+
+<!-- ABOUT -->
+<section id="about" class="section">
+<div class="container">
+<div class="row g-4 align-items-stretch">
+    <div class="col-lg-7">
+        <div class="info-card p-4 p-md-5">
+            <div class="kicker">About the Institution</div>
+            <h2 class="section-title h2 mt-1 mb-4">বিদ্যালয় সম্পর্কে</h2>
+            <p class="text-secondary lh-lg">
+                Narayangarh R.R.C.L.U.S. Niketan একটি Government Sponsored Higher Secondary School।
+                বিদ্যালয়ের উদ্দেশ্য হলো শিক্ষার্থীদের একটি সুশৃঙ্খল, নিরাপদ ও
+                শিক্ষাবান্ধব পরিবেশে গুণগত শিক্ষা প্রদান করা।
+            </p>
+            <p class="text-secondary lh-lg">
+                শ্রেণিকক্ষের পড়াশোনার পাশাপাশি খেলাধুলা, সাংস্কৃতিক চর্চা,
+                বিজ্ঞানমনস্কতা, সামাজিক দায়িত্ববোধ এবং নৈতিক মূল্যবোধের
+                বিকাশের উপরও গুরুত্ব দেওয়া হয়।
+            </p>
+            <button class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#aboutModal">
+                <i class="fa fa-info-circle me-2"></i>Read More
+            </button>
         </div>
     </div>
 
-    <!-- Quick actions -->
-    <section class="container py-5 quick-actions" id="about">
-        <div class="text-center mb-4">
-            <div class="section-kicker">Student Services</div>
-            <h2 class="section-title mt-1">Quick Access</h2>
-            <p class="text-secondary mb-0">প্রয়োজনীয় তথ্য ও পরিষেবা দ্রুত অ্যাক্সেস করুন</p>
+    <div class="col-lg-5">
+        <div class="quote-card p-4 p-md-5">
+            <div class="quote-mark">“</div>
+            <h2 class="h4 fw-bold mt-2">শিক্ষার উদ্দেশ্য</h2>
+            <p class="fs-5 mt-3">
+                “শুধু পরীক্ষায় ভালো ফল নয়—জীবনের প্রতিটি ক্ষেত্রে
+                সঠিক সিদ্ধান্ত নেওয়ার ক্ষমতা ও মানবিক মূল্যবোধ অর্জনই শিক্ষার বড় সাফল্য।”
+            </p>
+            <div class="small opacity-75">— Headmaster's Desk</div>
         </div>
+    </div>
+</div>
+</div>
+</section>
 
-        <div class="row g-3 g-lg-4">
-            <div class="col-12 col-sm-6 col-lg-3">
-                <div class="action-card p-3">
-                    <div class="action-icon mb-3"><i class="fa fa-list-ol"></i></div>
-                    <h3 class="h6 fw-bold">What to do?</h3>
-                    <p class="small text-secondary">ভর্তির সম্পূর্ণ প্রক্রিয়াটি জানুন।</p>
-                    <button class="btn btn-outline-primary w-100" data-bs-toggle="modal" data-bs-target="#howToModal">
-                        View Instructions
-                    </button>
+<!-- NOTICE + ADMISSION -->
+<section id="notice" class="section section-alt">
+<div class="container">
+<div class="row g-4">
+    <div class="col-lg-8">
+        <div class="notice-board">
+            <div class="notice-head p-4 d-flex justify-content-between align-items-center">
+                <div>
+                    <div class="small text-uppercase fw-bold opacity-75">Updates</div>
+                    <h2 class="h3 fw-bold mb-0">Notice Board</h2>
+                </div>
+                <i class="fa fa-bullhorn fs-3 opacity-75"></i>
+            </div>
+
+            <div class="notice-item d-flex gap-3">
+                <div class="date-badge"><div>01</div><small>NOTICE</small></div>
+                <div>
+                    <h3 class="h6 fw-bold mb-1">Online Admission</h3>
+                    <p class="small text-secondary mb-2">
+                        অনলাইন ভর্তির আবেদন বিদ্যালয়ের নির্ধারিত admission portal-এর মাধ্যমে করা যাবে।
+                    </p>
+                    <a href="sdcf.aspx?Mode=AdmReq&url=index.htm" class="btn btn-sm btn-primary">
+                        Apply Online
+                    </a>
                 </div>
             </div>
 
-            <div class="col-12 col-sm-6 col-lg-3">
-                <div class="action-card p-3">
-                    <div class="action-icon mb-3"><i class="fa fa-inr"></i></div>
-                    <h3 class="h6 fw-bold">Payment</h3>
-                    <p class="small text-secondary">ভর্তি ফি ও পেমেন্ট সংক্রান্ত তথ্য।</p>
-                    <button class="btn btn-outline-primary w-100" data-bs-toggle="modal" data-bs-target="#paymentModal">
-                        Payment Information
-                    </button>
-                </div>
-            </div>
-
-            <div class="col-12 col-sm-6 col-lg-3">
-                <div class="action-card p-3">
-                    <div class="action-icon mb-3"><i class="fa fa-bell-o"></i></div>
-                    <h3 class="h6 fw-bold">Notice</h3>
-                    <p class="small text-secondary">গুরুত্বপূর্ণ ভর্তি বিজ্ঞপ্তি দেখুন।</p>
-                    <a class="btn btn-outline-primary w-100" href="#notice">View Notice</a>
-                </div>
-            </div>
-
-            <div class="col-12 col-sm-6 col-lg-3">
-                <div class="action-card p-3">
-                    <div class="action-icon mb-3"><i class="fa fa-check-circle-o"></i></div>
-                    <h3 class="h6 fw-bold">Before Admission</h3>
-                    <p class="small text-secondary">আবেদনের আগে যা জানা প্রয়োজন।</p>
-                    <button class="btn btn-outline-primary w-100" data-bs-toggle="modal" data-bs-target="#beforeModal">
-                        Read Guidelines
-                    </button>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Admission CTA -->
-    <section class="container pb-5">
-        <div class="info-card p-4 p-md-5">
-            <div class="row align-items-center g-4">
-                <div class="col-lg-8">
-                    <div class="section-kicker">Online Admission</div>
-                    <h2 class="section-title mt-1">অনলাইনে ভর্তির আবেদন করুন</h2>
-                    <p class="text-secondary mb-0">
-                        আপনার শ্রেণির জন্য আবেদন শুরু করার আগে নির্দেশিকা ও বিজ্ঞপ্তি ভালোভাবে পড়ে নিন।
+            <div class="notice-item d-flex gap-3">
+                <div class="date-badge"><i class="fa fa-info"></i></div>
+                <div>
+                    <h3 class="h6 fw-bold mb-1">Offline Admission</h3>
+                    <p class="small text-secondary mb-0">
+                        অফলাইনে ভর্তির প্রয়োজন হলে বিদ্যালয়ের অফিসে যোগাযোগ করুন।
                     </p>
                 </div>
-                <div class="col-lg-4 text-lg-end">
-                    <a href="sdcf.aspx?Mode=AdmReq&url=index.htm"
-                       class="btn admission-btn btn-lg px-4 fw-bold w-100 w-lg-auto">
-                        <i class="fa fa-arrow-right me-2"></i>Go to Admission
-                    </a>
-                    <button type="button" class="btn btn-outline-secondary btn-lg px-4 mt-2 w-100"
-                            onclick="GoToGoogleForm()">
-                        <i class="fa fa-mobile me-2"></i>Admission in Mobile
-                    </button>
+            </div>
+
+            <div class="notice-item d-flex gap-3">
+                <div class="date-badge"><i class="fa fa-mobile"></i></div>
+                <div>
+                    <h3 class="h6 fw-bold mb-1">Admission from Mobile</h3>
+                    <p class="small text-secondary mb-2">মোবাইল থেকে আবেদন করার জন্য Google Form ব্যবহার করা যাবে।</p>
+                    <button class="btn btn-sm btn-outline-primary" onclick="GoToGoogleForm()">Open Mobile Form</button>
                 </div>
             </div>
-        </div>
-    </section>
-
-    <!-- Notice -->
-    <section class="container pb-5" id="notice">
-        <div class="row g-4">
-            <div class="col-lg-8">
-                <div class="info-card p-4 p-md-5 h-100">
-                    <div class="d-flex justify-content-between align-items-start gap-3 mb-4">
-                        <div>
-                            <div class="section-kicker">Latest Update</div>
-                            <h2 class="section-title h3 mt-1 mb-0">Admission Notice</h2>
-                        </div>
-                        <span class="badge text-bg-primary rounded-pill px-3 py-2">
-                            Important
-                        </span>
-                    </div>
-
-                    <div class="d-flex gap-3 mb-4">
-                        <div class="step-number">1</div>
-                        <div>
-                            <h3 class="h6 fw-bold mb-1">Online Admission</h3>
-                            <p class="mb-0 text-secondary">
-                                Start Date: <strong>26-12-2022</strong>
-                                &nbsp; | &nbsp;
-                                End Date: <strong>03-01-2023</strong>
-                            </p>
-                        </div>
-                    </div>
-
-                    <div class="d-flex gap-3">
-                        <div class="step-number">2</div>
-                        <div>
-                            <h3 class="h6 fw-bold mb-1">Offline Admission</h3>
-                            <p class="mb-0 text-secondary">
-                                Start Date: <strong>05-01-2023</strong>.
-                                বিস্তারিত তথ্যের জন্য বিদ্যালয়ের অফিসে যোগাযোগ করুন।
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Contact -->
-            <div class="col-lg-4" id="contact">
-                <div class="contact-card p-4 p-md-5 h-100">
-                    <div class="small text-uppercase fw-bold opacity-75">Need Help?</div>
-                    <h2 class="h4 fw-bold mt-2">Contact Office</h2>
-                    <p class="opacity-75">ভর্তি সংক্রান্ত সহায়তার জন্য সংশ্লিষ্ট নম্বরে যোগাযোগ করুন।</p>
-
-                    <div class="border-top border-light border-opacity-25 pt-3 mt-3">
-                        <div class="mb-3">
-                            <div class="small opacity-75">Office</div>
-                            <a class="text-white text-decoration-none fw-bold" href="tel:8250787947">
-                                <i class="fa fa-phone me-2"></i>8250787947
-                            </a>
-                        </div>
-                        <div class="mb-3">
-                            <div class="small opacity-75">XI Admission</div>
-                            <a class="text-white text-decoration-none fw-bold" href="tel:8900012813">
-                                <i class="fa fa-phone me-2"></i>8900012813
-                            </a>
-                        </div>
-                        <div>
-                            <div class="small opacity-75">V Admission</div>
-                            <a class="text-white text-decoration-none fw-bold" href="tel:7908671619">
-                                <i class="fa fa-phone me-2"></i>7908671619
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-</main>
-
-<!-- Footer -->
-<footer class="footer mt-2">
-    <div class="container py-4">
-        <div class="row g-3 align-items-center">
-            <div class="col-md-8">
-                <div class="fw-bold text-white">Narayangarh R.R.C.L.U.S. Niketan</div>
-                <div class="small mt-1">
-                    Bahurupa, Narayangarh, Paschim Medinipur, West Bengal – 721437
-                </div>
-            </div>
-            <div class="col-md-4 text-md-end">
-                <button class="btn btn-outline-light btn-sm" onclick="GoToOffice()">
-                    <i class="fa fa-lock me-1"></i> Office Login
-                </button>
-            </div>
-        </div>
-        <hr class="border-light border-opacity-10 my-3">
-        <div class="small d-flex flex-wrap justify-content-between gap-2">
-            <span>© <span id="currentYear"></span> Narayangarh R.R.C.L.U.S. Niketan</span>
-            <span>Official School Information & Admission Portal</span>
         </div>
     </div>
+
+    <div class="col-lg-4">
+        <div class="info-card p-4 p-md-5 h-100">
+            <div class="kicker">Admission</div>
+            <h2 class="section-title h3 mt-1">ভর্তির আগে</h2>
+            <ul class="text-secondary lh-lg ps-3">
+                <li>শ্রেণি ও যোগ্যতা যাচাই করুন।</li>
+                <li>প্রয়োজনীয় তথ্য ও নথি প্রস্তুত রাখুন।</li>
+                <li>ফর্ম Submit-এর আগে সব তথ্য যাচাই করুন।</li>
+                <li>প্রয়োজন অনুযায়ী payment সম্পন্ন করুন।</li>
+                <li>সমস্যা হলে বিদ্যালয়ের অফিসে যোগাযোগ করুন।</li>
+            </ul>
+            <button class="btn btn-primary w-100" data-bs-toggle="modal" data-bs-target="#admissionModal">
+                <i class="fa fa-check-circle me-2"></i>Admission Guidelines
+            </button>
+        </div>
+    </div>
+</div>
+</div>
+</section>
+
+<!-- SERVICES -->
+<section id="services" class="section">
+<div class="container">
+<div class="text-center mb-5">
+    <div class="kicker">Student & Parent Services</div>
+    <h2 class="section-title h2 mt-1">অনলাইন পরিষেবা</h2>
+    <p class="text-secondary mb-0">বিদ্যালয়ের গুরুত্বপূর্ণ পরিষেবাগুলিতে দ্রুত পৌঁছান</p>
+</div>
+
+<div class="row g-3 g-lg-4">
+    <div class="col-sm-6 col-lg-3">
+        <div class="service-card">
+            <div class="service-icon mb-3"><i class="fa fa-pencil-square-o"></i></div>
+            <h3 class="h5 fw-bold">Online Admission</h3>
+            <p class="small text-secondary">অনলাইনে ভর্তি আবেদন করুন।</p>
+            <a href="sdcf.aspx?Mode=AdmReq&url=index.htm" class="btn btn-outline-primary btn-sm">Open Portal</a>
+        </div>
+    </div>
+    <div class="col-sm-6 col-lg-3">
+        <div class="service-card">
+            <div class="service-icon mb-3"><i class="fa fa-file-text-o"></i></div>
+            <h3 class="h5 fw-bold">Notice & Circular</h3>
+            <p class="small text-secondary">বিদ্যালয়ের গুরুত্বপূর্ণ বিজ্ঞপ্তি।</p>
+            <a href="#notice" class="btn btn-outline-primary btn-sm">View Notices</a>
+        </div>
+    </div>
+    <div class="col-sm-6 col-lg-3">
+        <div class="service-card">
+            <div class="service-icon mb-3"><i class="fa fa-user"></i></div>
+            <h3 class="h5 fw-bold">Headmaster's Desk</h3>
+            <p class="small text-secondary">হেডমাস্টারের বার্তা ও পরিচিতি।</p>
+            <a href="hoidesk.html" class="btn btn-outline-primary btn-sm">Visit Desk</a>
+        </div>
+    </div>
+    <div class="col-sm-6 col-lg-3">
+        <div class="service-card">
+            <div class="service-icon mb-3"><i class="fa fa-phone"></i></div>
+            <h3 class="h5 fw-bold">Contact School</h3>
+            <p class="small text-secondary">অফিস ও ভর্তি সংক্রান্ত যোগাযোগ।</p>
+            <a href="#contact" class="btn btn-outline-primary btn-sm">Contact</a>
+        </div>
+    </div>
+</div>
+</div>
+</section>
+
+<!-- HEADMASTER -->
+<section id="hoi" class="section section-alt">
+<div class="container">
+<div class="hoi-card p-4 p-md-5">
+<div class="row align-items-center g-4">
+    <div class="col-md-auto text-center">
+        <img src="hoi-photo.jpg" alt="Headmaster" class="hoi-photo">
+    </div>
+    <div class="col">
+        <div class="kicker">Head of Institution</div>
+        <h2 class="section-title h2 mt-1 mb-1">ড. সৌমেন বাগ</h2>
+        <div class="text-primary fw-bold fs-5">হেডমাস্টার</div>
+        <div class="d-flex flex-wrap gap-2 my-3">
+            <span class="badge rounded-pill text-bg-light border">M.Sc.</span>
+            <span class="badge rounded-pill text-bg-light border">B.Ed.</span>
+            <span class="badge rounded-pill text-bg-light border">Ph.D. in Physics</span>
+        </div>
+        <p class="text-secondary mb-3">
+            “প্রতিটি শিক্ষার্থীর মধ্যে সম্ভাবনা রয়েছে। আমাদের কাজ সেই সম্ভাবনাকে
+            জ্ঞান, পরিশ্রম, শৃঙ্খলা ও মানবিকতার মাধ্যমে বিকশিত হতে সাহায্য করা।”
+        </p>
+        <div class="d-flex flex-wrap gap-2">
+            <a href="hoidesk.html" class="btn btn-primary">
+                <i class="fa fa-user me-2"></i>Headmaster's Desk
+            </a>
+            <a href="tel:+919732653039" class="btn btn-outline-primary">
+                <i class="fa fa-phone me-2"></i>+91 97326 53039
+            </a>
+        </div>
+    </div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- ACADEMIC / STUDENT LIFE -->
+<section class="section">
+<div class="container">
+<div class="text-center mb-5">
+    <div class="kicker">Beyond the Classroom</div>
+    <h2 class="section-title h2 mt-1">শিক্ষার্থীর সর্বাঙ্গীণ বিকাশ</h2>
+</div>
+<div class="row g-3 g-lg-4">
+    <div class="col-md-4">
+        <div class="service-card">
+            <div class="service-icon mb-3"><i class="fa fa-book"></i></div>
+            <h3 class="h5 fw-bold">Academic Excellence</h3>
+            <p class="text-secondary mb-0">বিষয়ভিত্তিক জ্ঞান, নিয়মিত অনুশীলন, প্রশ্ন করার অভ্যাস ও ধারণাভিত্তিক শিক্ষার উপর গুরুত্ব।</p>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="service-card">
+            <div class="service-icon mb-3"><i class="fa fa-futbol-o"></i></div>
+            <h3 class="h5 fw-bold">Sports & Fitness</h3>
+            <p class="text-secondary mb-0">খেলাধুলা, দলগত কাজ, শৃঙ্খলা ও সুস্থ জীবনযাপনের অভ্যাস গড়ে তোলার সুযোগ।</p>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="service-card">
+            <div class="service-icon mb-3"><i class="fa fa-paint-brush"></i></div>
+            <h3 class="h5 fw-bold">Culture & Creativity</h3>
+            <p class="text-secondary mb-0">সাংস্কৃতিক চর্চা, সৃজনশীলতা, আত্মপ্রকাশ ও সামাজিক মূল্যবোধের বিকাশ।</p>
+        </div>
+    </div>
+</div>
+</div>
+</section>
+
+<!-- GALLERY / LINKS -->
+<section id="links" class="section section-alt">
+<div class="container">
+<div class="row g-4">
+    <div class="col-lg-6">
+        <div class="info-card p-4 p-md-5">
+            <div class="kicker">Important Links</div>
+            <h2 class="section-title h3 mt-1">গুরুত্বপূর্ণ লিঙ্ক</h2>
+            <div class="link-list mt-3">
+                <a href="sdcf.aspx?Mode=AdmReq&url=index.htm">
+                    <span><i class="fa fa-pencil-square-o text-primary me-2"></i>Online Admission</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                <a href="hoidesk.html">
+                    <span><i class="fa fa-user text-primary me-2"></i>Headmaster's Desk</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                <a href="#notice">
+                    <span><i class="fa fa-bell-o text-primary me-2"></i>Notice Board</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                <a href="javascript:void(0)" onclick="GoToGoogleForm()">
+                    <span><i class="fa fa-mobile text-primary me-2"></i>Mobile Admission Form</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-6">
+        <div class="info-card p-3 h-100">
+            <div class="gallery-box h-100 p-4 text-center">
+                <div>
+                    <i class="fa fa-camera fs-1 mb-3"></i>
+                    <h2 class="h4 fw-bold">School Gallery</h2>
+                    <p class="mb-0 opacity-75">
+                        বিদ্যালয়ের অনুষ্ঠান, খেলাধুলা, সাংস্কৃতিক কার্যক্রম ও
+                        শিক্ষামূলক কর্মকাণ্ডের ছবি এখানে যুক্ত করা যাবে।
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="section">
+<div class="container">
+<div class="contact-card p-4 p-md-5">
+<div class="row g-4 align-items-center">
+    <div class="col-lg-7">
+        <div class="small text-uppercase fw-bold opacity-75">Contact Us</div>
+        <h2 class="h2 fw-bold mt-1">বিদ্যালয়ের সঙ্গে যোগাযোগ করুন</h2>
+        <p class="opacity-75 mb-0">
+            ভর্তি, বিদ্যালয়ের তথ্য অথবা প্রয়োজনীয় সহায়তার জন্য নির্ধারিত
+            যোগাযোগ নম্বরে যোগাযোগ করুন।
+        </p>
+    </div>
+    <div class="col-lg-5">
+        <div class="row g-2">
+            <div class="col-12">
+                <a href="tel:8250787947" class="btn btn-light w-100 text-start">
+                    <i class="fa fa-phone text-primary me-2"></i> Office: 8250787947
+                </a>
+            </div>
+            <div class="col-12">
+                <a href="tel:8900012813" class="btn btn-light w-100 text-start">
+                    <i class="fa fa-phone text-primary me-2"></i> XI Admission: 8900012813
+                </a>
+            </div>
+            <div class="col-12">
+                <a href="tel:7908671619" class="btn btn-light w-100 text-start">
+                    <i class="fa fa-phone text-primary me-2"></i> V Admission: 7908671619
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+<div class="container py-5">
+<div class="row g-4">
+    <div class="col-lg-6">
+        <h2 class="h5 text-white fw-bold">Narayangarh R.R.C.L.U.S. Niketan</h2>
+        <p class="small mb-2">Govt. Sponsored Higher Secondary School</p>
+        <p class="small mb-0">Bahurupa, Narayangarh, Paschim Medinipur, West Bengal – 721437</p>
+    </div>
+    <div class="col-sm-6 col-lg-3">
+        <div class="fw-bold text-white mb-2">Portal</div>
+        <div class="small d-grid gap-2">
+            <a href="#about">About School</a>
+            <a href="#notice">Notice Board</a>
+            <a href="#services">Services</a>
+            <a href="hoidesk.html">Headmaster's Desk</a>
+        </div>
+    </div>
+    <div class="col-sm-6 col-lg-3">
+        <div class="fw-bold text-white mb-2">Admission</div>
+        <div class="small d-grid gap-2">
+            <a href="sdcf.aspx?Mode=AdmReq&url=index.htm">Online Admission</a>
+            <a href="javascript:void(0)" onclick="GoToGoogleForm()">Mobile Admission</a>
+            <a href="#contact">Contact Office</a>
+            <button class="btn btn-outline-light btn-sm mt-1" onclick="GoToOffice()">
+                <i class="fa fa-lock me-1"></i> Office Login
+            </button>
+        </div>
+    </div>
+</div>
+<hr class="border-light border-opacity-10 my-4">
+<div class="d-flex flex-wrap justify-content-between gap-2 small">
+    <span>© <span id="year"></span> Narayangarh R.R.C.L.U.S. Niketan</span>
+    <span>Official School Information Portal</span>
+</div>
+</div>
 </footer>
 
-<!-- How-to Modal -->
-<div class="modal fade" id="howToModal" tabindex="-1" aria-labelledby="howToModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-lg modal-dialog-scrollable">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2 class="modal-title h5" id="howToModalLabel">
-                    <i class="fa fa-list-ol me-2"></i>What to do?
-                </h2>
-                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body p-4">
-                <p class="text-secondary">
-                    ভর্তির আবেদন করার আগে নিচের ধাপগুলি অনুসরণ করুন।
-                </p>
-                <ol class="mb-0">
-                    <li class="mb-2">আপনার ভর্তির শ্রেণি ও যোগ্যতা নিশ্চিত করুন।</li>
-                    <li class="mb-2">প্রয়োজনীয় নথি ও তথ্য আগে থেকে প্রস্তুত রাখুন।</li>
-                    <li class="mb-2">অনলাইন আবেদন ফর্ম সঠিকভাবে পূরণ করুন।</li>
-                    <li class="mb-2">আবেদন জমা দেওয়ার আগে সমস্ত তথ্য যাচাই করুন।</li>
-                    <li>প্রয়োজন অনুযায়ী ভর্তি ফি/পেমেন্ট সম্পন্ন করুন।</li>
-                </ol>
-            </div>
-            <div class="modal-footer">
-                <a href="sdcf.aspx?Mode=AdmReq&url=index.htm" class="btn btn-primary">
-                    Start Admission
-                </a>
-                <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
-            </div>
+<!-- ABOUT MODAL -->
+<div class="modal fade" id="aboutModal" tabindex="-1" aria-labelledby="aboutModalLabel" aria-hidden="true">
+<div class="modal-dialog modal-dialog-centered modal-lg modal-dialog-scrollable">
+<div class="modal-content">
+    <div class="modal-header">
+        <h2 class="modal-title h5" id="aboutModalLabel"><i class="fa fa-university me-2"></i>About the School</h2>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+    </div>
+    <div class="modal-body p-4">
+        <p>
+            বিদ্যালয়ের মূল লক্ষ্য হলো শিক্ষার্থীদের একটি সুশৃঙ্খল,
+            শিক্ষাবান্ধব এবং মূল্যবোধভিত্তিক পরিবেশে শিক্ষা প্রদান করা।
+        </p>
+        <p>
+            ছাত্রছাত্রীদের পাঠ্যবিষয়ের পাশাপাশি যুক্তিবোধ, সৃজনশীলতা,
+            খেলাধুলা, সামাজিক দায়িত্ব ও মানবিক মূল্যবোধের বিকাশে উৎসাহিত করা হয়।
+        </p>
+        <div class="alert alert-info mb-0">
+            <i class="fa fa-info-circle me-2"></i>
+            বিদ্যালয়ের প্রকৃত ইতিহাস, প্রতিষ্ঠার সাল, পরিসংখ্যান ও পরিকাঠামোর তথ্য
+            ভবিষ্যতে এই অংশে যোগ করা যেতে পারে।
         </div>
     </div>
-</div>
-
-<!-- Payment Modal -->
-<div class="modal fade" id="paymentModal" tabindex="-1" aria-labelledby="paymentModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2 class="modal-title h5" id="paymentModalLabel">
-                    <i class="fa fa-inr me-2"></i>Payment Information
-                </h2>
-                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body p-4">
-                <p>
-                    ভর্তি সংক্রান্ত পেমেন্টের নির্দিষ্ট নিয়ম, পরিমাণ এবং পদ্ধতি
-                    বিদ্যালয়ের বর্তমান বিজ্ঞপ্তি অনুযায়ী অনুসরণ করুন।
-                </p>
-                <div class="alert alert-info mb-0">
-                    <i class="fa fa-info-circle me-2"></i>
-                    ভুল বা অননুমোদিত পেমেন্ট এড়াতে শুধুমাত্র বিদ্যালয়ের নির্ধারিত পদ্ধতি ব্যবহার করুন।
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
-            </div>
-        </div>
+    <div class="modal-footer">
+        <button class="btn btn-light" data-bs-dismiss="modal">Close</button>
     </div>
 </div>
-
-<!-- Before Admission Modal -->
-<div class="modal fade" id="beforeModal" tabindex="-1" aria-labelledby="beforeModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-lg modal-dialog-scrollable">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2 class="modal-title h5" id="beforeModalLabel">
-                    <i class="fa fa-check-circle-o me-2"></i>Before Admission
-                </h2>
-                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body p-4">
-                <ul class="mb-0">
-                    <li class="mb-2">নাম, জন্মতারিখ এবং অভিভাবকের তথ্য সঠিকভাবে লিখুন।</li>
-                    <li class="mb-2">প্রয়োজনীয় নথির তথ্য আগে যাচাই করুন।</li>
-                    <li class="mb-2">মোবাইল নম্বর সক্রিয় রাখুন, যাতে প্রয়োজনে বিদ্যালয় যোগাযোগ করতে পারে।</li>
-                    <li class="mb-2">ফর্ম Submit করার আগে Preview/তথ্যগুলি ভালোভাবে যাচাই করুন।</li>
-                    <li>কোনও সমস্যা হলে বিদ্যালয়ের অফিসে যোগাযোগ করুন।</li>
-                </ul>
-            </div>
-            <div class="modal-footer">
-                <a href="#notice" class="btn btn-primary" data-bs-dismiss="modal">View Notice</a>
-                <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
-            </div>
-        </div>
-    </div>
+</div>
 </div>
 
-<!-- Bootstrap 5 JS -->
+<!-- ADMISSION MODAL -->
+<div class="modal fade" id="admissionModal" tabindex="-1" aria-labelledby="admissionModalLabel" aria-hidden="true">
+<div class="modal-dialog modal-dialog-centered modal-lg modal-dialog-scrollable">
+<div class="modal-content">
+    <div class="modal-header">
+        <h2 class="modal-title h5" id="admissionModalLabel"><i class="fa fa-check-circle me-2"></i>Admission Guidelines</h2>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+    </div>
+    <div class="modal-body p-4">
+        <ol class="lh-lg">
+            <li>আপনার ভর্তির শ্রেণি ও যোগ্যতা নিশ্চিত করুন।</li>
+            <li>প্রয়োজনীয় নথি ও তথ্য প্রস্তুত রাখুন।</li>
+            <li>অনলাইন আবেদন ফর্মে তথ্য সঠিকভাবে পূরণ করুন।</li>
+            <li>Submit করার আগে সমস্ত তথ্য পুনরায় যাচাই করুন।</li>
+            <li>প্রযোজ্য ক্ষেত্রে payment সম্পন্ন করুন।</li>
+            <li>আবেদনের পর বিদ্যালয়ের নির্দেশিকা অনুযায়ী পরবর্তী ধাপ অনুসরণ করুন।</li>
+        </ol>
+        <div class="alert alert-warning mb-0">
+            <i class="fa fa-exclamation-triangle me-2"></i>
+            ভর্তির তারিখ ও ফি পরিবর্তিত হতে পারে। বর্তমান বিদ্যালয় বিজ্ঞপ্তিকে সর্বদা অগ্রাধিকার দিন।
+        </div>
+    </div>
+    <div class="modal-footer">
+        <a href="sdcf.aspx?Mode=AdmReq&url=index.htm" class="btn btn-primary">Start Admission</a>
+        <button class="btn btn-light" data-bs-dismiss="modal">Close</button>
+    </div>
+</div>
+</div>
+</div>
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-
 <script>
-    document.getElementById("currentYear").textContent = new Date().getFullYear();
+document.getElementById("year").textContent = new Date().getFullYear();
 
-    function GoTo() {
-        window.location.href = "sdcf.aspx?Mode=AdmReq&url=index.htm";
+function GoToOffice(){
+    if(confirm("Do you school Stuff?")){
+        window.open("Default.aspx","_blank");
     }
+}
 
-    function GoToOffice() {
-        if (confirm("Do you school Stuff?")) {
-            window.open("Default.aspx", "_blank");
-        }
-    }
-
-    function GoToGoogleForm() {
-        window.open(
-            "https://docs.google.com/forms/d/e/1FAIpQLSci9qXXIxa_RvJW_VsKGwu3qkwvRhsS5NuMUaSkd6-66qfywA/viewform?usp=sf_link",
-            "_blank"
-        );
-    }
+function GoToGoogleForm(){
+    window.open(
+        "https://docs.google.com/forms/d/e/1FAIpQLSci9qXXIxa_RvJW_VsKGwu3qkwvRhsS5NuMUaSkd6-66qfywA/viewform?usp=sf_link",
+        "_blank"
+    );
+}
 </script>
 
 </body>
