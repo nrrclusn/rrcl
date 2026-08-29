@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Email & Mobile OTP Verification</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background-color: #f4f7f6;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    .card {
+      background: #ffffff;
+      padding: 30px 25px;
+      border-radius: 12px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+      width: 100%;
+      max-width: 420px;
+    }
+
+    .card h2 {
+      color: #2c3e50;
+      margin-bottom: 8px;
+      font-size: 22px;
+      text-align: center;
+    }
+
+    .card p.subtitle {
+      color: #7f8c8d;
+      font-size: 14px;
+      text-align: center;
+      margin-bottom: 24px;
+    }
+
+    .form-group {
+      margin-bottom: 18px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 6px;
+      font-weight: 600;
+      font-size: 14px;
+      color: #34495e;
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #cccccc;
+      border-radius: 6px;
+      font-size: 15px;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .form-group input:focus {
+      border-color: #3498db;
+    }
+
+    .btn {
+      width: 100%;
+      padding: 12px;
+      background-color: #3498db;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+
+    .btn:hover {
+      background-color: #2980b9;
+    }
+
+    .btn-verify {
+      background-color: #2ecc71;
+    }
+
+    .btn-verify:hover {
+      background-color: #27ae60;
+    }
+
+    .otp-section {
+      display: none;
+      margin-top: 24px;
+      padding-top: 20px;
+      border-top: 1px solid #eee;
+    }
+
+    .otp-inputs {
+      display: flex;
+      justify-content: space-between;
+      gap: 8px;
+      margin-bottom: 18px;
+    }
+
+    .otp-inputs input {
+      width: 45px;
+      height: 50px;
+      text-align: center;
+      font-size: 20px;
+      font-weight: bold;
+      border: 1px solid #cccccc;
+      border-radius: 6px;
+      outline: none;
+    }
+
+    .otp-inputs input:focus {
+      border-color: #2ecc71;
+      box-shadow: 0 0 5px rgba(46, 204, 113, 0.4);
+    }
+
+    .resend-text {
+      text-align: center;
+      font-size: 13px;
+      color: #7f8c8d;
+      margin-top: 12px;
+    }
+
+    .resend-text a {
+      color: #3498db;
+      text-decoration: none;
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card">
+    <h2>OTP Verification</h2>
+    <p class="subtitle">আপনার ইমেইল এবং মোবাইল নম্বর লিখুন</p>
+
+    <form id="detailsForm">
+      <div class="form-group">
+        <label for="email">Email Address</label>
+        <input type="email" id="email" placeholder="example@mail.com" required>
+      </div>
+
+      <div class="form-group">
+        <label for="mobile">Mobile Number</label>
+        <input type="tel" id="mobile" placeholder="10-digit mobile number" pattern="[0-9]{10}" required>
+      </div>
+
+      <button type="submit" class="btn" id="sendBtn">OTP পাঠান</button>
+    </form>
+
+    <!-- OTP Section -->
+    <div class="otp-section" id="otpSection">
+      <p class="subtitle" style="margin-bottom: 12px;">আপনার ইমেইল ও মোবাইলে পাঠানো 6-ডিজিটের OTP প্রবেশ করান</p>
+      
+      <form id="otpForm">
+        <div class="otp-inputs">
+          <input type="text" maxlength="1" class="otp-field" pattern="[0-9]" required>
+          <input type="text" maxlength="1" class="otp-field" pattern="[0-9]" required>
+          <input type="text" maxlength="1" class="otp-field" pattern="[0-9]" required>
+          <input type="text" maxlength="1" class="otp-field" pattern="[0-9]" required>
+          <input type="text" maxlength="1" class="otp-field" pattern="[0-9]" required>
+          <input type="text" maxlength="1" class="otp-field" pattern="[0-9]" required>
+        </div>
+
+        <button type="submit" class="btn btn-verify">Verify OTP</button>
+      </form>
+
+      <div class="resend-text">
+        কোড পাননি? <a href="#" id="resendLink">পুনরায় পাঠান (Resend)</a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const detailsForm = document.getElementById('detailsForm');
+    const otpSection = document.getElementById('otpSection');
+    const otpFields = document.querySelectorAll('.otp-field');
+
+    // Handle initial Send OTP submit
+    detailsForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      const email = document.getElementById('email').value;
+      const mobile = document.getElementById('mobile').value;
+
+      // Real implementation-এ এখানে Backend API call হবে (e.g., ASP.NET Core API / Node.js)
+      alert(`OTP পাঠানো হয়েছে:\nEmail: ${email}\nMobile: ${mobile}`);
+
+      // UI update
+      document.getElementById('sendBtn').disabled = true;
+      document.getElementById('email').readOnly = true;
+      document.getElementById('mobile').readOnly = true;
+      otpSection.style.display = 'block';
+      otpFields[0].focus();
+    });
+
+    // Handle Auto-focus logic for 6 OTP boxes
+    otpFields.forEach((field, index) => {
+      field.addEventListener('input', (e) => {
+        if (e.target.value.length === 1 && index < otpFields.length - 1) {
+          otpFields[index + 1].focus();
+        }
+      });
+
+      field.addEventListener('keydown', (e) => {
+        if (e.key === 'Backspace' && !e.target.value && index > 0) {
+          otpFields[index - 1].focus();
+        }
+      });
+    });
+
+    // Handle OTP Verify Submit
+    document.getElementById('otpForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      let otpValue = "";
+      otpFields.forEach(input => otpValue += input.value);
+      
+      alert(`প্রবেশ করানো OTP: ${otpValue}\nযাচাই সফল হয়েছে!`);
+    });
+  </script>
+
+</body>
+</html>
