@@ -72,6 +72,9 @@ body{
 .navbar{box-shadow:0 4px 18px rgba(0,0,0,.07)}
 .navbar-brand{font-weight:800}
 .nav-link{font-weight:600}
+.dropdown-menu{border-radius:12px;box-shadow:var(--shadow);border:1px solid var(--border)}
+.dropdown-item{font-weight:500;padding:8px 16px}
+.dropdown-item:hover{background:#edf4ff;color:var(--primary)}
 .hero{
     min-height:480px;
     display:flex;
@@ -289,6 +292,21 @@ body{
             <li class="nav-item"><a class="nav-link" href="#notice">Notice</a></li>
             <li class="nav-item"><a class="nav-link" href="#services">Services</a></li>
             <li class="nav-item"><a class="nav-link" href="#hoi">Headmaster</a></li>
+            
+            <!-- DROPDOWN MENU ADDED HERE -->
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    More Pages
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="pagesDropdown">
+                    <li><a class="dropdown-item" href="hoidesk.html"><i class="fa fa-user me-2 text-primary"></i>Headmaster's Desk</a></li>
+                    <li><a class="dropdown-item" href="employee.html"><i class="fa fa-id-card me-2 text-primary"></i>Employee Portal</a></li>
+                    <li><a class="dropdown-item" href="gallery.html"><i class="fa fa-picture-o me-2 text-primary"></i>Photo Gallery</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item" href="javascript:void(0)" onclick="GoToGoogleForm()"><i class="fa fa-mobile me-2 text-primary"></i>Mobile Admission Form</a></li>
+                </ul>
+            </li>
+
             <li class="nav-item"><a class="nav-link" href="#links">Links</a></li>
             <li class="nav-item ms-lg-2 mt-2 mt-lg-0">
                 <a href="sdcf.aspx?Mode=AdmReq&url=index.htm" class="btn btn-primary px-3">
