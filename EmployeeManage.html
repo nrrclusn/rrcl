@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Employee Management System</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body class="bg-light">
+
+<div class="container my-5">
+  <h2 class="text-center mb-4">Employee Management System</h2>
+
+  <!-- Add Employee Form -->
+  <div class="card mb-5 shadow-sm">
+    <div class="card-header bg-primary text-white">
+      <h5 class="mb-0">নতুন এমপ্লয়ি যোগ করুন</h5>
+    </div>
+    <div class="card-body">
+      <form id="addEmployeeForm">
+        <div class="row g-3">
+          <div class="col-md-6">
+            <label class="form-label">নাম *</label>
+            <input type="text" id="addName" class="form-control" required>
+          </div>
+          <div class="col-md-6">
+            <label class="form-label">লিঙ্গ (Gender) *</label>
+            <select id="addGender" class="form-select" required>
+              <option value="">নির্বাচন করুন</option>
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+          <div class="col-md-4">
+            <label class="form-label">পদবী (Designation)</label>
+            <input type="text" id="addDesignation" class="form-control">
+          </div>
+          <div class="col-md-4">
+            <label class="form-label">যোগ্যতা (Qualification)</label>
+            <input type="text" id="addQualification" class="form-control">
+          </div>
+          <div class="col-md-4">
+            <label class="form-label">বিষয় (Subject)</label>
+            <input type="text" id="addSubject" class="form-control">
+          </div>
+          <div class="col-md-4">
+            <label class="form-label">মোবাইল নম্বর</label>
+            <input type="number" id="addMobileNumber" class="form-control">
+          </div>
+          <div class="col-md-4">
+            <label class="form-label">জন্ম তারিখ</label>
+            <input type="date" id="addDOB" class="form-control">
+          </div>
+          <div class="col-md-4">
+            <label class="form-label">যোগদানের তারিখ</label>
+            <input type="date" id="addDOJ" class="form-control">
+          </div>
+        </div>
+        <button type="submit" id="addBtn" class="btn btn-success mt-3">সংরক্ষণ করুন</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Employee List Table -->
+  <div class="card shadow-sm">
+    <div class="card-header bg-dark text-white">
+      <h5 class="mb-0">এমপ্লয়ি তালিকা</h5>
+    </div>
+    <div class="card-body">
+      <div class="table-responsive">
+        <table class="table table-striped table-hover align-middle">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>নাম</th>
+              <th>পদবী</th>
+              <th>বিষয়</th>
+              <th>মোবাইল</th>
+              <th>লিঙ্গ</th>
+            </tr>
+          </thead>
+          <tbody id="employeeTableBody">
+            <tr><td colspan="6" class="text-center">লোড হচ্ছে...</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+  // Correct Initialization via global window object
+  const { createClient } = window.supabase;
+  const SUPABASE_URL = 'https://kehcdmuiyiikewdxzwdj.supabase.co';
+  const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtlaGNkbXVpeWlpa2V3ZHh6d2RqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODc5OTU1ODQsImV4cCI6MjEwMzU3MTU4NH0.WT5vSe_4_ZacvAd1zz2zAuFB87D5zN7zeOMSQlkclwY';
+  
+  const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
+
+  // Fetch Data
+  async function fetchEmployees() {
+    const tbody = document.getElementById('employeeTableBody');
+    const { data, error } = await supabase.from('Employee').select('*').order('EmployeeID', { ascending: true });
+    
+    if (error) {
+      console.error('Error fetching data:', error);
+      tbody.innerHTML = `<tr><td colspan="6" class="text-danger text-center">ডাটা লোড সমস্যা: ${error.message}</td></tr>`;
+      return;
+    }
+
+    tbody.innerHTML = '';
+
+    if (!data || data.length === 0) {
+      tbody.innerHTML = '<tr><td colspan="6" class="text-center">কোনো এমপ্লয়ির তথ্য পাওয়া যায়নি।</td></tr>';
+      return;
+    }
+
+    data.forEach(emp => {
+      const tr = document.createElement('tr');
+      tr.innerHTML = `
+        <td>${emp.EmployeeID}</td>
+        <td>${emp.EmployeeName || '-'}</td>
+        <td>${emp.Designation || '-'}</td>
+        <td>${emp.Subject || '-'}</td>
+        <td>${emp.MobileNumber || '-'}</td>
+        <td>${emp.Gender || '-'}</td>
+      `;
+      tbody.appendChild(tr);
+    });
+  }
+
+  // Insert Data
+  document.getElementById('addEmployeeForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const addBtn = document.getElementById('addBtn');
+    addBtn.disabled = true;
+    addBtn.innerText = 'সংরক্ষণ হচ্ছে...';
+
+    const payload = {
+      EmployeeName: document.getElementById('addName').value.trim(),
+      Gender: document.getElementById('addGender').value,
+      Designation: document.getElementById('addDesignation').value.trim() || null,
+      Qualification: document.getElementById('addQualification').value.trim() || null,
+      Subject: document.getElementById('addSubject').value.trim() || null,
+      MobileNumber: document.getElementById('addMobileNumber').value ? parseInt(document.getElementById('addMobileNumber').value) : null,
+      DateOfBirth: document.getElementById('addDOB').value || null,
+      DateOfJoin: document.getElementById('addDOJ').value || null
+    };
+
+    const { data, error } = await supabase.from('Employee').insert([payload]);
+
+    if (error) {
+      console.error("Insert Error:", error);
+      alert('ডাটা যোগ করতে সমস্যা হয়েছে:\n' + error.message);
+    } else {
+      alert('ডাটা সফলভাবে সংরক্ষণ করা হয়েছে!');
+      document.getElementById('addEmployeeForm').reset();
+      fetchEmployees();
+    }
+
+    addBtn.disabled = false;
+    addBtn.innerText = 'সংরক্ষণ করুন';
+  });
+
+  // Initial Load
+  fetchEmployees();
+</script>
+</body>
+</html>
