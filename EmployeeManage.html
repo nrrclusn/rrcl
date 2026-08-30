@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="bn">
 <head>
@@ -12,6 +13,7 @@
 <div class="container my-5">
   <h2 class="text-center mb-4">Employee Management System</h2>
 
+  <!-- Add Employee Form -->
   <div class="card mb-5 shadow-sm">
     <div class="card-header bg-primary text-white">
       <h5 class="mb-0">নতুন এমপ্লয়ি যোগ করুন</h5>
@@ -62,6 +64,7 @@
     </div>
   </div>
 
+  <!-- Employee List Table -->
   <div class="card shadow-sm">
     <div class="card-header bg-dark text-white">
       <h5 class="mb-0">এমপ্লয়ি তালিকা</h5>
@@ -89,105 +92,51 @@
   </div>
 </div>
 
-<div class="modal fade" id="editModal" tabindex="-1" aria-hidden="true">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-      <div class="modal-header bg-warning">
-        <h5 class="modal-title">তথ্য আপডেট করুন</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <form id="editEmployeeForm">
-          <input type="hidden" id="editEmployeeId">
-          <div class="row g-3">
-            <div class="col-md-6">
-              <label class="form-label">নাম *</label>
-              <input type="text" id="editName" class="form-control" required>
-            </div>
-            <div class="col-md-6">
-              <label class="form-label">লিঙ্গ (Gender) *</label>
-              <select id="editGender" class="form-select" required>
-                <option value="Male">Male</option>
-                <option value="Female">Female</option>
-                <option value="Other">Other</option>
-              </select>
-            </div>
-            <div class="col-md-4">
-              <label class="form-label">পদবী</label>
-              <input type="text" id="editDesignation" class="form-control">
-            </div>
-            <div class="col-md-4">
-              <label class="form-label">যোগ্যতা</label>
-              <input type="text" id="editQualification" class="form-control">
-            </div>
-            <div class="col-md-4">
-              <label class="form-label">বিষয়</label>
-              <input type="text" id="editSubject" class="form-control">
-            </div>
-            <div class="col-md-4">
-              <label class="form-label">মোবাইল নম্বর</label>
-              <input type="number" id="editMobileNumber" class="form-control">
-            </div>
-            <div class="col-md-4">
-              <label class="form-label">জন্ম তারিখ</label>
-              <input type="date" id="editDOB" class="form-control">
-            </div>
-            <div class="col-md-4">
-              <label class="form-label">যোগদানের তারিখ</label>
-              <input type="date" id="editDOJ" class="form-control">
-            </div>
-          </div>
-          <div class="modal-footer mt-4 pb-0 pe-0">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">বন্ধ করুন</button>
-            <button type="submit" id="updateBtn" class="btn btn-primary">আপডেট করুন</button>
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
-</div>
-
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
 <script>
-  // Initialize Supabase Client Correctly
+  // Correct Initialization
   const { createClient } = window.supabase;
   const SUPABASE_URL = 'https://kehcdmuiyiikewdxzwdj.supabase.co';
   const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtlaGNkbXVpeWlpa2V3ZHh6d2RqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODc5OTU1ODQsImV4cCI6MjEwMzU3MTU4NH0.WT5vSe_4_ZacvAd1zz2zAuFB87D5zN7zeOMSQlkclwY';
   
   const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
-  const editModal = new bootstrap.Modal(document.getElementById('editModal'));
 
-  // Fetch and display data
+  // Fetch Data with Console Logger
   async function fetchEmployees() {
     const tbody = document.getElementById('employeeTableBody');
-    const { data, error } = await supabase.from('Employee').select('*').order('EmployeeID', { ascending: true });
+    const { data, error } = await supabase.from('Employee').select('*');
     
     if (error) {
-      console.error('Error fetching data:', error);
-      tbody.innerHTML = `<tr><td colspan="7" class="text-danger text-center">ডাটা লোড করতে সমস্যা হয়েছে: ${error.message}</td></tr>`;
+      console.error('Data Load Error:', error);
+      tbody.innerHTML = `<tr><td colspan="7" class="text-danger text-center">ডাটা লোড করতে সমস্যা: ${error.message} (সঠিক RLS / Column Name চেক করুন)</td></tr>`;
       return;
     }
 
     tbody.innerHTML = '';
-
-    if (data.length === 0) {
-      tbody.innerHTML = '<tr><td colspan="7" class="text-center">কোনো এমপ্লয়ির তথ্য পাওয়া যায়নি।</td></tr>';
+    if (!data || data.length === 0) {
+      tbody.innerHTML = '<tr><td colspan="7" class="text-center">কোনো তথ্য পাওয়া যায়নি।</td></tr>';
       return;
     }
 
     data.forEach(emp => {
+      // Dynamic Field Checking for Capital or Small letters
+      const empId = emp.EmployeeID || emp.id || '-';
+      const empName = emp.EmployeeName || emp.name || emp.employee_name || '-';
+      const designation = emp.Designation || emp.designation || '-';
+      const subject = emp.Subject || emp.subject || '-';
+      const mobile = emp.MobileNumber || emp.mobile_number || '-';
+      const gender = emp.Gender || emp.gender || '-';
+
       const tr = document.createElement('tr');
       tr.innerHTML = `
-        <td>${emp.EmployeeID}</td>
-        <td>${emp.EmployeeName || ''}</td>
-        <td>${emp.Designation || '-'}</td>
-        <td>${emp.Subject || '-'}</td>
-        <td>${emp.MobileNumber || '-'}</td>
-        <td>${emp.Gender || '-'}</td>
-        <td>
-          <button class="btn btn-sm btn-warning" onclick="openEditModal(${emp.EmployeeID})">সম্পাদনা</button>
-        </td>
+        <td>${empId}</td>
+        <td>${empName}</td>
+        <td>${designation}</td>
+        <td>${subject}</td>
+        <td>${mobile}</td>
+        <td>${gender}</td>
+        <td><button class="btn btn-sm btn-secondary" disabled>সম্পাদনা</button></td>
       `;
       tbody.appendChild(tr);
     });
@@ -196,10 +145,12 @@
   // Insert Data
   document.getElementById('addEmployeeForm').addEventListener('submit', async (e) => {
     e.preventDefault();
+    
     const addBtn = document.getElementById('addBtn');
     addBtn.disabled = true;
     addBtn.innerText = 'সংরক্ষণ হচ্ছে...';
 
+    // Payload Object matching standard schema
     const payload = {
       EmployeeName: document.getElementById('addName').value.trim(),
       Gender: document.getElementById('addGender').value,
@@ -211,75 +162,23 @@
       DateOfJoin: document.getElementById('addDOJ').value || null
     };
 
-    const { error } = await supabase.from('Employee').insert([payload]);
+    console.log("Submitting Payload:", payload);
+
+    const { data, error } = await supabase.from('Employee').insert([payload]);
 
     if (error) {
-      alert('ডাটা যোগ করতে সমস্যা হয়েছে: ' + error.message);
+      console.error("Supabase Error Details:", error);
+      alert('ভুল হয়েছে! Error: ' + error.message + '\n\nপরামর্শ: Supabase Table-এর Column Name এবং RLS Policy চেক করুন।');
     } else {
+      alert('সফলভাবে সংরক্ষণ করা হয়েছে!');
       document.getElementById('addEmployeeForm').reset();
-      await fetchEmployees();
+      fetchEmployees();
     }
 
     addBtn.disabled = false;
     addBtn.innerText = 'সংরক্ষণ করুন';
   });
 
-  // Open Edit Modal with existing values
-  async function openEditModal(id) {
-    const { data, error } = await supabase.from('Employee').select('*').eq('EmployeeID', id).single();
-    
-    if (error) {
-      alert('ডাটা আনতে সমস্যা হয়েছে: ' + error.message);
-      return;
-    }
-
-    document.getElementById('editEmployeeId').value = data.EmployeeID;
-    document.getElementById('editName').value = data.EmployeeName || '';
-    document.getElementById('editGender').value = data.Gender || 'Male';
-    document.getElementById('editDesignation').value = data.Designation || '';
-    document.getElementById('editQualification').value = data.Qualification || '';
-    document.getElementById('editSubject').value = data.Subject || '';
-    document.getElementById('editMobileNumber').value = data.MobileNumber || '';
-    document.getElementById('editDOB').value = data.DateOfBirth || '';
-    document.getElementById('editDOJ').value = data.DateOfJoin || '';
-
-    editModal.show();
-  }
-
-  // Update Data
-  document.getElementById('editEmployeeForm').addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const updateBtn = document.getElementById('updateBtn');
-    updateBtn.disabled = true;
-    updateBtn.innerText = 'আপডেট হচ্ছে...';
-
-    const id = document.getElementById('editEmployeeId').value;
-
-    const payload = {
-      EmployeeName: document.getElementById('editName').value.trim(),
-      Gender: document.getElementById('editGender').value,
-      Designation: document.getElementById('editDesignation').value.trim() || null,
-      Qualification: document.getElementById('editQualification').value.trim() || null,
-      Subject: document.getElementById('editSubject').value.trim() || null,
-      MobileNumber: document.getElementById('editMobileNumber').value ? parseInt(document.getElementById('editMobileNumber').value) : null,
-      DateOfBirth: document.getElementById('editDOB').value || null,
-      DateOfJoin: document.getElementById('editDOJ').value || null
-    };
-
-    const { error } = await supabase.from('Employee').update(payload).eq('EmployeeID', id);
-
-    if (error) {
-      alert('আপডেট করতে সমস্যা হয়েছে: ' + error.message);
-    } else {
-      editModal.hide();
-      await fetchEmployees();
-    }
-
-    updateBtn.disabled = false;
-    updateBtn.innerText = 'আপডেট করুন';
-  });
-
-  // Initial Load
   fetchEmployees();
 </script>
 </body>
