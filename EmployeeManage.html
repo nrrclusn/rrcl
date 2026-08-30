@@ -152,7 +152,10 @@
   // Initialize Supabase Client
   const SUPABASE_URL = 'https://kehcdmuiyiikewdxzwdj.supabase.co';
   const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtlaGNkbXVpeWlpa2V3ZHh6d2RqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODc5OTU1ODQsImV4cCI6MjEwMzU3MTU4NH0.WT5vSe_4_ZacvAd1zz2zAuFB87D5zN7zeOMSQlkclwY';
-  const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+  // ✅ সঠিক কোড
+const { createClient } = window.supabase;
+const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
+
 
   const editModal = new bootstrap.Modal(document.getElementById('editModal'));
 
